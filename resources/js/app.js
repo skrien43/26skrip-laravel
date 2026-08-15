@@ -1072,6 +1072,30 @@ heroBtn?.addEventListener("click", () => {
     }, 1200);
 });
 
+//block mobile on admin view
+function checkScreenSize() {
+    const overlay = document.getElementById("screen-block-overlay");
+    if (!overlay) return;
+
+    const MIN_WIDTH = 1024;
+    const isMobileUA = /Android|iPhone|iPad|iPod|Mobile|Windows Phone/i.test(navigator.userAgent);
+    const isBlocked = isMobileUA || window.innerWidth < MIN_WIDTH;
+
+    if (isBlocked) {
+        overlay.style.display = "flex";
+        document.body.style.overflow = "hidden";
+    } else {
+        overlay.style.display = "none";
+        document.body.style.overflow = "";
+    }
+}
+
+checkScreenSize();
+document.addEventListener("DOMContentLoaded", checkScreenSize);
+window.addEventListener("resize", checkScreenSize);
+window.addEventListener("orientationchange", checkScreenSize);
+
+
 window.refreshPage = refreshPage;
 window.fetchMatkul = fetchMatkul;
 window.selectMatkul = selectMatkul;
@@ -1100,3 +1124,5 @@ window.descJadwal = descJadwal;
 window.toggleRoomSchedule = toggleRoomSchedule;
 window.confirmPemindahan = confirmPemindahan;
 window.confirmPeminjaman = confirmPeminjaman;
+window.checkScreenSize = checkScreenSize;
+

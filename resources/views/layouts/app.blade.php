@@ -76,6 +76,29 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
+    @if($role === 'adm')
+        <div id="screen-block-overlay" style="display:none;"
+            class="fixed inset-0 z-999999 flex items-center justify-center bg-black/85 backdrop-blur-sm">
+            <div class="mx-4 max-w-sm rounded-2xl bg-white p-6 text-center shadow-xl dark:bg-gray-900">
+                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-error-50 dark:bg-error-500/15">
+                    <svg class="text-error-600 dark:text-error-500" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                </div>
+                <h3 class="text-base font-semibold text-gray-800 dark:text-white/90">RESTRICTED</h3>
+                <p class="mt-2 text-14 text-gray-500 dark:text-gray-400">
+                    Halaman ini hanya dapat diakses melalui perangkat Laptop dan/atau Monitor Komputer.
+                    Silakan gunakan perangkat yang sesuai.
+                </p>
+                <form method="POST" action="{{ route('logout') }}"
+                    class="mt-5 block w-full rounded-lg bg-error-500 py-2.5 text-14 font-medium text-white transition-colors duration-150 hover:bg-error-600">
+                    @csrf
+                    <button type="submit">LOGOUT</button>
+                </form>
+            </div>
+        </div>
+    @endif
+
     <body class="flex min-h-screen flex-col bg-gray-50 dark:bg-gray-900 overflow-x-hidden" x-data="{ 'loaded': true }">
         {{-- preloader --}}
         <x-common.preloader/>
