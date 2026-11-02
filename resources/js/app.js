@@ -436,8 +436,13 @@ function toggleEdit(id) {
 
 //copy OTP
 function copyOTP() {
-    const code = document.querySelector(".code-box").textContent.trim();
-    const textToCopy = "OTP Peminjaman Perangkat Anda: " + code;
+    const digitBoxes = document.querySelectorAll("#otp-display > div");
+    if (digitBoxes.length === 0) return;
+
+    const code = Array.from(digitBoxes)
+        .map((el) => el.textContent.trim())
+        .join("");
+    const textToCopy = "OTP Peminjaman Anda: " + code;
 
     if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard
